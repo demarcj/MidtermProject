@@ -13,6 +13,7 @@ public class Main {
         //DeMarc's Test Variables
         double price = 2;
 
+
         System.out.println("Hello World!");
         //The name of the restaurant is DeNorLi's
 
@@ -33,6 +34,7 @@ public class Main {
         //Ask if the user is complete or want to see list again (if statement so the user can start the menu again)
             //Validate to make sure they don't use int and use an invalid string
 
+
         //Create a method for the subtotal, a method for the sale tax, and a method for the
         //grand-total
 
@@ -43,6 +45,7 @@ public class Main {
 
         //Ask for payment type Cash, Credit, or Check
             //Validate to make sure that type right for payment type
+        pay(scan);
 
         //Use scan for type and use an if statement for the answer
         //Use a method to display a receipt with all items ordered, subtotal, grand-
@@ -51,10 +54,39 @@ public class Main {
         //Return to the original menu for a new order
         System.out.println("Thank you, and come back, soon!");
     }
+
+    //This method is for the getting the total price of the without tax
     public static double totalPrice(Scanner scan, double price){
         System.out.println("How many do you want?");
-        //Need the validation for this method
+        //Need validation for this method
         int quantity = scan.nextInt();
         return price * quantity;
     }
+
+    public static String pay(Scanner scan){
+        System.out.println("What way would like to pay, cash, check or credit?");
+        //Need validation for this method
+        String paymentType = scan.next();
+        if(paymentType.equalsIgnoreCase("cash")){
+
+        }else if(paymentType.equalsIgnoreCase("check number")){
+            System.out.println("What is the check number?");
+            int checkNumber = scan.nextInt();
+            //Need validation for this method
+            System.out.println("Thank you");
+        }else {
+            System.out.println("What is your credit card number?");
+            int ccNumber = scan.nextInt();
+            //Need validation for this method
+            System.out.println("What is the expiration date?");
+            int expirationDate = scan.nextInt();
+            //Need validation for this method
+            System.out.println("What is the CVV?");
+            int cvv = scan.nextInt();
+            //Need validation for this method
+            System.out.println("Thank you!");
+        }
+        return paymentType;
+    }
+
 }
