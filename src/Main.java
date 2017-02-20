@@ -42,7 +42,7 @@ public class main {
 
 
         //Ask for payment type Cash, Credit, or Check
-            //Validate to make sure that type right for payment type
+        //Validate to make sure that type right for payment type
 
         //Use scan for type and use an if statement for the answer
         //Use a method to display a receipt with all items ordered, subtotal, grand-
@@ -57,4 +57,7 @@ public class main {
         int quantity = scan.nextInt();
         return price * quantity;
     }
+
+
+
 }
