@@ -17,7 +17,7 @@ public class Main {
         //Create menu to be displayed so that the user can pick an item (we need a for loop to display menu)
         //Ask for how many of that item do they want (this is going to need a scanner)
             //Validate to make sure they don't put a string and make sure don't put negative number
-        
+
         //Method for the item that does price * quantity
         //Ask if the user is complete or want to see list again (if statement so the user can start the menu again)
             //Validate to make sure they don't use int and use an invalid string
