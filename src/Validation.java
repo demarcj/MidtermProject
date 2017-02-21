@@ -11,9 +11,8 @@ public class Validation {
         boolean isValid = false;
 
         while (isValid == false) {
-
             System.out.print(prompt);
-            if (sc.hasNextInt()){
+            if (sc.hasNextInt()) {
                 i = sc.nextInt();
                 isValid = true;
 
@@ -25,12 +24,12 @@ public class Validation {
         return i;
     }
 
-    public static String getString(Scanner sc, String prompt){
+    public static String getString(Scanner sc, String prompt) {
         System.out.println(prompt);
 
         String s = sc.next();// read user entry
 
-        while (!(s.equals("cash") || s.equals("check") || s.equals("credit"))) {
+        while (!(s.equalsIgnoreCase("cash") || s.equalsIgnoreCase("check") || s.equalsIgnoreCase("credit"))) {
             System.out.println("Invalid choice, please choose cash, check or credit");
             s = sc.next();
             sc.nextLine();  // discard any other data entered on the line
@@ -52,6 +51,22 @@ public class Validation {
                 isValid = true;
             }
         }
-              return d;
+        return d;
     }
+
+
+    public static String getYesOrNo(Scanner sc, String prompt) {
+        System.out.println("Would you like anything else yes or no?");
+
+        String s = sc.next();// read user entry
+
+        while (!(s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("no"))) {
+            System.out.println("Error! Invalid entry, please type yes or no ");
+            s = sc.next();
+            sc.nextLine();  // discard any other data entered on the line
+
+        }
+        return s;
+    }
+
 }
