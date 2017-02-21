@@ -1,16 +1,68 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 
 
-    public class MenuItems {
+    public class Menu {
 
-        Scanner deNorLi = new Scanner(System.in);
+        //Scanner deNorLi = new Scanner(System.in);
 
         // initialise total to start from zero
-        double total = 0;
+        String name;
+        String category;
+        String description;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        double price;
+
+    public Menu(){
+        String name = "";
+        String category = "";
+        String description = "";
+        double price = 0;
+    }
+
+    public Menu(String name, String category, String description, double price){
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+    }
+
+    Menu food = new Menu("pizza", "Itlian", "osidjdflj", 54.00);
 
         // American Cusine Menu Items With Prices
-
+        /*
         double surfTurf = 34.50;
         double lambCo = 34.50;
         double southernSoul = 34.50;
@@ -26,11 +78,11 @@ import java.util.Scanner;
         double winBuckDepo = 22.50;
         double roastBeefParle = 22.50;
         double burger360 = 18.75;
+        */
 
+        //int decide;
 
-        int decide;
-
-        public MenuItems(double surfTurf, double lambCo, double southernSoul, double westernPeel,
+        /*public MenuItems(double surfTurf, double lambCo, double southernSoul, double westernPeel,
                          double asianWok, double cajunSkillet, double mexicanBowl, double veganSoul, double seaFoodJack,
                          double winBuckDepo, double roastBeefParle, double burger360) {
 
@@ -49,7 +101,12 @@ import java.util.Scanner;
             this.roastBeefParle = roastBeefParle;
             this.burger360 = burger360;
             }
-    }
+
+
+            public String toString(){
+            return "Great";
+            }
+    */}
 
 
 

@@ -14,8 +14,9 @@ public class Main {
         //DeMarc's Test Variables
         double price = 2;
         String answer = "";
-        Validation valid = new Validation();
-
+        //Validation valid = new Validation();
+        Menu test = new Menu();
+        //System.out.println(test.food());
         System.out.println("Hello World!");
         //The name of the restaurant is DeNorLi's
 
@@ -24,8 +25,7 @@ public class Main {
         //ArrayList<Restuarant> billList = new ArrayList<Resturant>();
         //ArrayList<Restuarant> billTotalList = new ArrayList<Resturant>();
         //do{
-        
-        
+
         //Create a class for a restaurant with name, category, description, and price
         //For class we need 12 items minimum; they must be stored in the program list array
         //Charlie is doing the class the name, category, description, and price
@@ -44,8 +44,9 @@ public class Main {
         billTotalList.add(getPrice);*/
         //Ask if the user is complete or want to see list again (if statement so the user can start the menu again)
         	//Validate to make sure they don't use int and use an invalid string
+        //Menu food = new Menu();
         System.out.println("Would you like anything else?");
-
+        System.out.println();
         
         //answer = valid.getStr();
         //}while(answer.equalsIgnoreCase("yes"));
@@ -103,29 +104,30 @@ public class Main {
     }
 
     public static String pay(Scanner scan){
-        System.out.println("What way would like to pay, cash, check or credit?");
         //Need validation for this method
-        String paymentType = scan.next();
+        Validation valid = new Validation();
+        String paymentType = valid.getString(scan, "What way would like to pay, cash, check or credit?");
         if(paymentType.equalsIgnoreCase("cash")){
         	//amountOfChange(scan);
+            return "Thank you!";
         }else if(paymentType.equalsIgnoreCase("check number")){
             System.out.println("What is the check number?");
             int checkNumber = scan.nextInt();
             //Need validation for this method
-            return "Thank you";
+            return "Thank you!";
         }else {
             System.out.println("What is your credit card number?");
-            int ccNumber = scan.nextInt();
+            //int ccNumber = scan.nextInt();
             //Need validation for this method
             System.out.println("What is the expiration date?");
-            int expirationDate = scan.nextInt();
+            //int expirationDate = scan.nextInt();
             //Need validation for this method
             System.out.println("What is the CVV?");
-            int cvv = scan.nextInt();
+            //int cvv = scan.nextInt();
             //Need validation for this method
             return "Thank you!";
         }
-        return "Thank you!";
+        //return "Thank you!";
     }
     
    /* public static ArrayList<Restuarant> setfood(){

@@ -26,15 +26,15 @@ public class Validation {
                 sc.nextLine();  // discard any other data entered on the line
         }
              return i;
-        }
+    }
 
-}
+
 
 
     public static String getString(Scanner sc, String prompt)
 
     {
-        System.out.print(prompt);
+        System.out.println(prompt);
 
         String s = sc.next();// read user entry
 
@@ -49,6 +49,7 @@ public class Validation {
 
 
     }
+}
 
 
 
