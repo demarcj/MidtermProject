@@ -13,22 +13,20 @@ public class Validation {
         while (isValid == false) {
 
             System.out.print(prompt);
-                if (sc.hasNextInt())
+            if (sc.hasNextInt())
 
-                {
-                    i = sc.nextInt();
-                    isValid = true;
+            {
+                i = sc.nextInt();
+                isValid = true;
 
-                } else {
-                    System.out.println("Error! Invalid integer value. Try again.");
-                }
+            } else {
+                System.out.println("Error! Invalid integer value. Try again.");
+            }
 
-                sc.nextLine();  // discard any other data entered on the line
+            sc.nextLine();  // discard any other data entered on the line
         }
-             return i;
-        }
-
-}
+        return i;
+    }
 
 
     public static String getString(Scanner sc, String prompt)
@@ -51,5 +49,24 @@ public class Validation {
     }
 
 
+    public static double getDouble(Scanner sc, String prompt, double total) {
+        double d = 0;
+        boolean isValid = false;
+
+        while (isValid == false) {
+            d = sc.nextDouble();
+
+            if (d < total) {
+
+                System.out.println("Error! Number must be " + total + " or greater.");
 
 
+            } else {
+                isValid = true;
+            }
+
+
+        }
+              return d;
+    }
+}
