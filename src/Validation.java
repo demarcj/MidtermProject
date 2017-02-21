@@ -56,13 +56,13 @@ public class Validation {
     }
 
 
-    public static String getyesorno(Scanner sc, String prompt) {
+    public static String getYesOrNo(Scanner sc, String prompt) {
         System.out.println("Would you like anything else yes or no?");
 
         String s = sc.next();// read user entry
 
         while (!(s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("no"))) {
-            System.out.println("Error! Invalid entrie, please type yes or no ");
+            System.out.println("Error! Invalid entry, please type yes or no ");
             s = sc.next();
             sc.nextLine();  // discard any other data entered on the line
 

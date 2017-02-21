@@ -60,7 +60,7 @@
         this.price = price;
     }
 
-    Menu food = new Menu("pizza", "Itlian", "osidjdflj", 54.00);
+
 
         // American Cusine Menu Items With Prices
         /*
@@ -103,11 +103,11 @@
             this.burger360 = burger360;
             }
 
-
+*/
             public String toString(){
-            return "Great";
+            return name + category;
             }
-    */}
+    }
 
 
 

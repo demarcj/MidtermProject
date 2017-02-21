@@ -14,18 +14,17 @@ public class Main {
         //DeMarc's Test Variables
         double price = 2;
         String answer = "";
+        double total = 5;
 
-        //Validation valid = new Validation();
-        //Menu test = new Menu();
-        //System.out.println(test.food());
-        System.out.println("Hello World!");
+        Validation valid = new Validation();
+
         //The name of the restaurant is DeNorLi's
 
         System.out.println("Welcome to the DeNorLi");
         //ArrayList<Restuarant> foodList = new ArrayList<Resturant>();
         //ArrayList<Restuarant> billList = new ArrayList<Resturant>();
         //ArrayList<Restuarant> billTotalList = new ArrayList<Resturant>();
-        //do{
+        do{
 
         //Create a class for a restaurant with name, category, description, and price
         //For class we need 12 items minimum; they must be stored in the program list array
@@ -47,11 +46,9 @@ public class Main {
         //Ask if the user is complete or want to see list again (if statement so the user can start the menu again)
         	//Validate to make sure they don't use int and use an invalid string
         //Menu food = new Menu();
-        System.out.println("Would you like anything else?");
-        System.out.println();
-        
-        //answer = valid.getStr();
-        //}while(answer.equalsIgnoreCase("yes"));
+
+        answer = valid.getYesOrNo(scan, "Would you like anything else?");
+        }while(answer.equalsIgnoreCase("yes"));
         
         
         //Create a method for the subtotal, a method for the sale tax, and a method for the
@@ -62,13 +59,11 @@ public class Main {
 
         //Make sure we have an array or arraylist to keep track of orders
         //Remember rounding issues: Hint look into the BigDecimal class
+*/
 
+        System.out.println(pay(scan, total));
 
-        //Ask for payment type Cash, Credit, or Check
-            //Validate to make sure that type right for payment type
-        System.out.println(pay(scan));
-        
-
+    /*
         //Use scan for type and use an if statement for the answer
         //Use a method to display a receipt with all items ordered, subtotal, grand-
         //total and payment info
@@ -105,44 +100,34 @@ public class Main {
         return price * quantity;
     }
 
-    public static String pay(Scanner scan){
-        //Need validation for this method
+    public static String pay(Scanner scan, double total){
         Validation valid = new Validation();
         String paymentType = valid.getString(scan, "What way would like to pay, cash, check or credit?");
         if(paymentType.equalsIgnoreCase("cash")){
-            Validation valid1 = new Validation();
-            valid1.getDouble(scan, "Put in your amount", 5);
-        	//amountOfChange(scan);
+            double cashAmount = valid.getDouble(scan, "Put in your amount.", total);
+            amountOfChange(total, cashAmount, "Your change is ");
             return "Thank you!";
         }else if(paymentType.equalsIgnoreCase("check number")){
-            System.out.println("What is the check number?");
-            int checkNumber = scan.nextInt();
-            //Need validation for this method
+            valid.getInt(scan, "What is the check number?");
             return "Thank you!";
         }else {
-            System.out.println("What is your credit card number?");
-            //int ccNumber = scan.nextInt();
-            //Need validation for this method
-            System.out.println("What is the expiration date?");
-            //int expirationDate = scan.nextInt();
-            //Need validation for this method
-            System.out.println("What is the CVV?");
-            //int cvv = scan.nextInt();
-            //Need validation for this method
+            valid.getInt(scan, "What is your credit card number?");
+            valid.getInt(scan, "What is the expiration date?");
+            valid.getInt(scan, "What is the CVV?");
             return "Thank you!";
         }
-        //return "Thank you!";
     }
     
    /* public static ArrayList<Restuarant> setfood(){
     	ArrayList<Restuarant> foodList = new ArrayList<Restuarant>();
     	foodList.add();
     	return foodList;
-    }
+    }*/
     
-    public static double amountOfChange(Scanner scan){
-    	double totalAmount = 0;
-    	return totalAmount;
+    public static double amountOfChange(double total, double cashAmount, String prompt){
+        double change = cashAmount - total;
+        System.out.println(prompt + change);
+        return change;
     }
     
     public static String getReceipt(){
@@ -151,5 +136,5 @@ public class Main {
     }
     public static double getSaleTax(double totalPrice){
     	return totalPrice * .1;
-    }*/
+    }
 }
