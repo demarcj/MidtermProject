@@ -11,7 +11,6 @@ public class Validation {
         boolean isValid = false;
 
         while (isValid == false) {
-
             System.out.print(prompt);
             if (sc.hasNextInt()) {
                 i = sc.nextInt();

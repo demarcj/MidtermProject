@@ -14,31 +14,37 @@ public class Main {
         //DeMarc's Test Variables
         double price = 2;
         String answer = "";
-        double total = 5;
+        double total = 0;
 
         Validation valid = new Validation();
 
-        //The name of the restaurant is DeNorLi's
+
 
         System.out.println("Welcome to the DeNorLi");
-        //ArrayList<Restuarant> foodList = new ArrayList<Resturant>();
-        //ArrayList<Restuarant> billList = new ArrayList<Resturant>();
-        //ArrayList<Restuarant> billTotalList = new ArrayList<Resturant>();
+        ArrayList<Menu> foodList = new ArrayList<Menu>();
+        ArrayList<Menu> billList = new ArrayList<Menu>();
+        //ArrayList<Menu> billTotalList = new ArrayList<Menu>();
+
+        Menu food1 = new Menu("pizza", "Itl", "ljlk", 15);
+        Menu food2 = new Menu("burger", "Amer", "aaa", 10);
+
+        foodList.add(food1);
+        foodList.add(food2);
         do{
 
         //Create a class for a restaurant with name, category, description, and price
-        //For class we need 12 items minimum; they must be stored in the program list array
         //Charlie is doing the class the name, category, description, and price
-        
-        //foodList = setFood();
-        //int orderedFood = getFood(scan, foodList);
+            int order = showMenu(scan, foodList);
         
         //Create menu to be displayed so that the user can pick an item (we need a for loop to display menu)
         //Ask for how many of that item do they want (this is going to need a scanner)
             //Validate to make sure they don't put a string and make sure don't put negative number
         //Method for the item that does price * quantity
+            total = foodList.get(order).getPrice();
+            System.out.println("It cost " + total);
+            System.out.println(getTotalPrice(scan, total));
+
         /*double getPrice = getTotalPrice(scan, billList.get(orderedFood));
-        System.out.println("You've ordered:");
         System.out.println(getOrder(foodList));
         System.out.println("Your total is " + getPrice);
         billTotalList.add(getPrice);*/
@@ -49,8 +55,7 @@ public class Main {
 
         answer = valid.getYesOrNo(scan, "Would you like anything else?");
         }while(answer.equalsIgnoreCase("yes"));
-        
-        
+
         //Create a method for the subtotal, a method for the sale tax, and a method for the
         //grand-total
        /* double finalTotal = getFinalTotal(billTotalList);
@@ -72,31 +77,28 @@ public class Main {
         System.out.println("Thank you, and come back, soon!");
     */}
     
-    /*public static double getGrandTotal(double x, double y){
+    public static double getGrandTotal(double x, double y){
     	return x + y;
     }
     
-    public static double getFinalTotal(ArrayList<Restuarant> billTotalList){
+    /*public static double getFinalTotal(ArrayList<Menu> billTotalList){
     	double total = 0;
     	for(int i = 0; i < billTotalList.size(); i++){
     		total += billTotalList.get(i);
     	}
     	return total;
-    }
+    }*/
     
-    public static void getOrder(ArrayList<Restaurant> foodList){
+    public static void getOrder(ArrayList<Menu> foodList){
     	for(int i = 0; i < foodList.size(); i++){
     		System.out.println(foodList.get(i));
     	}
-    }*/
+    }
 
     //This method is for the getting the total price of the without tax
     public static double getTotalPrice(Scanner scan, double price){
-        //System.out.println("How many do you want?");
-        //Need validation for this method
         Validation valid = new Validation(); 
         int quantity = valid.getInt(scan, "How many do you want?");
-        //int quantity = scan.nextInt();
         return price * quantity;
     }
 
@@ -118,11 +120,19 @@ public class Main {
         }
     }
     
-   /* public static ArrayList<Restuarant> setfood(){
-    	ArrayList<Restuarant> foodList = new ArrayList<Restuarant>();
-    	foodList.add();
-    	return foodList;
-    }*/
+   public static int showMenu(Scanner scan, ArrayList<Menu> foodList){
+       int choice = 0;
+    	for(int i = 0; i < foodList.size(); i++){
+            System.out.println((i + 1) + "" + foodList.get(i));
+    	    if(i == foodList.size() - 1){
+                Validation valid = new Validation();
+                choice = valid.getInt(scan, "What food would you like?");
+                System.out.println(foodList.get(choice));
+                return choice;
+            }
+        }
+        return choice;
+    }
     
     public static double amountOfChange(double total, double cashAmount, String prompt){
         double change = cashAmount - total;
