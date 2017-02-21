@@ -16,6 +16,7 @@ public class Main {
         //DeMarc's Test Variables
         double price = 2;
         String answer = "";
+        double cost = 0;
         double total = 0;
 
         Validation valid = new Validation();
@@ -24,7 +25,9 @@ public class Main {
 
         System.out.println("Welcome to the DeNorLi");
         ArrayList<Menu> foodList = new ArrayList<Menu>();
-        ArrayList<Menu> billList = new ArrayList<Menu>();
+        //ArrayList<Menu> billList = new ArrayList<Menu>();
+        ArrayList<Menu> orderList = new ArrayList<Menu>();
+
         //ArrayList<Menu> billTotalList = new ArrayList<Menu>();
 
         Menu food1 = new Menu("pizza", "Itl", "ljlk", 15);
@@ -32,60 +35,58 @@ public class Main {
 
         foodList.add(food1);
         foodList.add(food2);
-        do{
+        while (true) {
+            do {
 
-        //Create a class for a restaurant with name, category, description, and price
-        //Charlie is doing the class the name, category, description, and price
-            int order = showMenu(scan, foodList);
-        
-        //Create menu to be displayed so that the user can pick an item (we need a for loop to display menu)
-        //Ask for how many of that item do they want (this is going to need a scanner)
-            //Validate to make sure they don't put a string and make sure don't put negative number
-        //Method for the item that does price * quantity
-            total = foodList.get(order).getPrice();
-            System.out.println("It cost " + total);
-            System.out.println(getTotalPrice(scan, total));
+                //Create a class for a restaurant with name, category, description, and price
+                //Charlie is doing the class the name, category, description, and price
+                int order = showMenu(scan, foodList);
+
+                //Create menu to be displayed so that the user can pick an item (we need a for loop to display menu)
+                //Ask for how many of that item do they want (this is going to need a scanner)
+                //Validate to make sure they don't put a string and make sure don't put negative number
+                //Method for the item that does price * quantity
+                cost = foodList.get(order).getPrice();
+                orderList.add(foodList.get(order));
+                System.out.println("It cost " + cost);
+                System.out.println(getTotalPrice(scan, cost));
 
         /*double getPrice = getTotalPrice(scan, billList.get(orderedFood));
         System.out.println(getOrder(foodList));
         System.out.println("Your total is " + getPrice);
         billTotalList.add(getPrice);*/
 
-        //Ask if the user is complete or want to see list again (if statement so the user can start the menu again)
-        	//Validate to make sure they don't use int and use an invalid string
-        //Menu food = new Menu();
+                //Ask if the user is complete or want to see list again (if statement so the user can start the menu again)
+                //Validate to make sure they don't use int and use an invalid string
+                //Menu food = new Menu();
+                total += cost;
+                answer = valid.getYesOrNo(scan, "Would you like anything else?");
+            } while (answer.equalsIgnoreCase("yes"));
 
-        answer = valid.getYesOrNo(scan, "Would you like anything else?");
-        }while(answer.equalsIgnoreCase("yes"));
+            double saleTax = getSaleTax(total);
+            System.out.println(saleTax);
+            double grandTotal = getGrandTotal(total, saleTax);
 
-        //Create a method for the subtotal, a method for the sale tax, and a method for the
-        //grand-total
+            System.out.println(pay(scan, total));
 
-        double saleTax = getSaleTax(total);
-        System.out.println(saleTax);
-        getGrandTotal(total, saleTax);
-
-        //Make sure we have an array or arraylist to keep track of orders
-        //Remember rounding issues: Hint look into the BigDecimal class
-
-
-        System.out.println(pay(scan, total));
-
-        //Use scan for type and use an if statement for the answer
-        //Use a method to display a receipt with all items ordered, subtotal, grand-
-        //total and payment info
-        getReceipt();
-        //Return to the original menu for a new order
-        System.out.println("Thank you, and come back, soon!");
+            getReceipt(orderList, total, grandTotal);
+            System.out.println("Thank you, and come back, soon!");
+        }
     }
-    
+
+
+
+
+
+
+
+
     public static double getGrandTotal(double x, double y){
     	return x + y;
     }
     
-    public static double getFinalTotal(){
-
-    	return total + ;
+    public static double getFinalTotal(double total, double grandTotal){
+    	return total + grandTotal;
     }
     
     public static void getOrder(ArrayList<Menu> foodList){
@@ -127,7 +128,6 @@ public class Main {
                 Validation valid = new Validation();
                 choice = valid.getInt(scan, "What food would you like?");
                 System.out.println(foodList.get(choice));
-                return choice;
             }
         }
         return choice;
@@ -139,9 +139,13 @@ public class Main {
         return change;
     }
     
-    public static String getReceipt(){
-    	String receipt = "";
-    	return receipt;
+    public static void getReceipt(ArrayList<Menu> orderList, double subtotal, double grandTotal){
+        System.out.print("You've ordered ");
+        for(int i = 0; i < orderList.size(); i++){
+            System.out.println(orderList.get(i));
+        }
+        System.out.println("Your subtotal is " + subtotal);
+        System.out.println("Your grand total is " + grandTotal);
     }
     public static double getSaleTax(double totalPrice){
     	return totalPrice * .1;

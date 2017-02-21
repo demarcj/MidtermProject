@@ -14,6 +14,7 @@ public class Validation {
             System.out.print(prompt);
             if (sc.hasNextInt()) {
                 i = sc.nextInt();
+                i -= 1;
                 isValid = true;
 
             } else {
