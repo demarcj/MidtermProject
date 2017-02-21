@@ -29,3 +29,27 @@ public class Validation {
         }
 
 }
+
+
+    public static String getString(Scanner sc, String prompt)
+
+    {
+        System.out.print(prompt);
+
+        String s = sc.next();// read user entry
+
+        while (!(s.equals("cash") || s.equals("check") || s.equals("credit"))) {
+            System.out.println("Invalid choice, please choose cash, check or credit");
+            s = sc.next();
+
+            sc.nextLine();  // discard any other data entered on the line
+        }
+
+        return s;
+
+
+    }
+
+
+
+
