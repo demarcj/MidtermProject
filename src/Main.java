@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
+        //private static DecimalFormat df2 = new DecimalFormat(".##");
         Scanner scan = new Scanner(System.in);
         //DeMarc's Test Variables
         double price = 2;
@@ -68,36 +70,33 @@ public class Main {
 
         //Create a method for the subtotal, a method for the sale tax, and a method for the
         //grand-total
-       /* double finalTotal = getFinalTotal(billTotalList);
-        double saleTax = getSaleTax(totalPrice);
-        getGrandTotal(finalTotal, saleTax);
+
+        double saleTax = getSaleTax(total);
+        System.out.println(saleTax);
+        getGrandTotal(total, saleTax);
 
         //Make sure we have an array or arraylist to keep track of orders
         //Remember rounding issues: Hint look into the BigDecimal class
-*/
+
 
         System.out.println(pay(scan, total));
 
-    /*
         //Use scan for type and use an if statement for the answer
         //Use a method to display a receipt with all items ordered, subtotal, grand-
         //total and payment info
         getReceipt();
         //Return to the original menu for a new order
         System.out.println("Thank you, and come back, soon!");
-    */}
+    }
     
     public static double getGrandTotal(double x, double y){
     	return x + y;
     }
     
-    /*public static double getFinalTotal(ArrayList<Menu> billTotalList){
-    	double total = 0;
-    	for(int i = 0; i < billTotalList.size(); i++){
-    		total += billTotalList.get(i);
-    	}
-    	return total;
-    }*/
+    public static double getFinalTotal(){
+
+    	return total + ;
+    }
     
     public static void getOrder(ArrayList<Menu> foodList){
     	for(int i = 0; i < foodList.size(); i++){
@@ -133,7 +132,7 @@ public class Main {
    public static int showMenu(Scanner scan, ArrayList<Menu> foodList){
        int choice = 0;
     	for(int i = 0; i < foodList.size(); i++){
-            System.out.println((i + 1) + "" + foodList.get(i));
+            System.out.println((i + 1) + " " + foodList.get(i));
     	    if(i == foodList.size() - 1){
                 Validation valid = new Validation();
                 choice = valid.getInt(scan, "What food would you like?");

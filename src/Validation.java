@@ -18,6 +18,7 @@ public class Validation {
 
             } else {
                 System.out.println("Error! Invalid integer value. Try again.");
+                sc.nextLine();
             }
         }
         sc.nextLine();  // discard any other data entered on the line
