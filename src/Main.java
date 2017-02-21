@@ -14,8 +14,9 @@ public class Main {
         //DeMarc's Test Variables
         double price = 2;
         String answer = "";
+
         //Validation valid = new Validation();
-        Menu test = new Menu();
+        //Menu test = new Menu();
         //System.out.println(test.food());
         System.out.println("Hello World!");
         //The name of the restaurant is DeNorLi's
@@ -42,6 +43,7 @@ public class Main {
         System.out.println(getOrder(foodList));
         System.out.println("Your total is " + getPrice);
         billTotalList.add(getPrice);*/
+
         //Ask if the user is complete or want to see list again (if statement so the user can start the menu again)
         	//Validate to make sure they don't use int and use an invalid string
         //Menu food = new Menu();
@@ -64,7 +66,7 @@ public class Main {
 
         //Ask for payment type Cash, Credit, or Check
             //Validate to make sure that type right for payment type
-        pay(scan);
+        System.out.println(pay(scan));
         
 
         //Use scan for type and use an if statement for the answer
@@ -108,6 +110,8 @@ public class Main {
         Validation valid = new Validation();
         String paymentType = valid.getString(scan, "What way would like to pay, cash, check or credit?");
         if(paymentType.equalsIgnoreCase("cash")){
+            Validation valid1 = new Validation();
+            valid1.getDouble(scan, "Put in your amount", 5);
         	//amountOfChange(scan);
             return "Thank you!";
         }else if(paymentType.equalsIgnoreCase("check number")){

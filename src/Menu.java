@@ -10,6 +10,7 @@
         String name;
         String category;
         String description;
+        double price;
 
         public String getName() {
             return name;
@@ -43,7 +44,7 @@
             this.price = price;
         }
 
-        double price;
+
 
     public Menu(){
         String name = "";
