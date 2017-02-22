@@ -127,11 +127,12 @@ public class Main {
             valid.getInt(scan, "What is the check number?");
             return "Thank you!";
         }else {
-            valid.getInt(scan, "What is your credit card number?");
+            valid.creditCardNumber(scan, "What is your credit card number?");
             valid.getInt(scan, "What is the expiration date?");
             valid.getInt(scan, "What is the CVV?");
             return "Thank you!";
         }
+
     }
     
    public static int showMenu(Scanner scan, ArrayList<Menu> foodList){
