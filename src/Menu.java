@@ -1,16 +1,14 @@
-//import java.util.Scanner;
+import java.text.DecimalFormat;
 
 
 
     public class Menu {
 
-        //Scanner deNorLi = new Scanner(System.in);
-
-        // initialise total to start from zero
-        String name;
-        String category;
-        String description;
-        double price;
+    	private static DecimalFormat df2 = new DecimalFormat("#.00");
+        private String name;
+        private String category;
+        private String description;
+        private double price;
 
         public String getName() {
             return name;
@@ -61,58 +59,15 @@
     }
 
 
-
-        // American Cusine Menu Items With Prices
-        /*
-        double surfTurf = 34.50;
-        double lambCo = 34.50;
-        double southernSoul = 34.50;
-
-        double westernPeel = 26.50;
-        double asianWok = 26.25;
-        double cajunSkillet = 26.25;
-
-        double mexicanBowl = 24.50;
-        double veganSoul = 24.50;
-        double seaFoodJack = 24.50;
-
-        double winBuckDepo = 22.50;
-        double roastBeefParle = 22.50;
-        double burger360 = 18.75;
-        */
-
-        //int decide;
-
-        /*public MenuItems(double surfTurf, double lambCo, double southernSoul, double westernPeel,
-                         double asianWok, double cajunSkillet, double mexicanBowl, double veganSoul, double seaFoodJack,
-                         double winBuckDepo, double roastBeefParle, double burger360) {
-
-
-            this.total = total;
-            this.surfTurf = surfTurf;
-            this.lambCo = lambCo;
-            this.southernSoul = southernSoul;
-            this.westernPeel = westernPeel;
-            this.asianWok = asianWok;
-            this.cajunSkillet = cajunSkillet;
-            this.mexicanBowl = mexicanBowl;
-            this.veganSoul = veganSoul;
-            this.seaFoodJack = seaFoodJack;
-            this.winBuckDepo = winBuckDepo;
-            this.roastBeefParle = roastBeefParle;
-            this.burger360 = burger360;
-            }
-
-*/
             public String toString(){
-            return name + category;
+            return name + "\t" + category + "\t$" + df2.format(price);
             }
     }
 
 
 
                 //System.out.println("|--------------------------------------------|");
-                //System.out.println("|                 DeNorLi’s                  |");
+                //System.out.println("|                 DeNorLi’s                |");
                 //System.out.println("|--------------------------------------------|");
                 //System.out.println("| Menu Item #                    Price       |");
                 //System.out.println("|--------------------------------------------|");
@@ -132,6 +87,5 @@
                 //System.out.println("| E |           EXIT                         |");
                 //System.out.println("|--------------------------------------------|");
                 //System.out.println();
-                //System.out.println("Enter choice");
-
+                
 

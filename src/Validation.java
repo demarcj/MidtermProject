@@ -4,6 +4,29 @@ import java.util.Scanner;
  * Created by wilsonnorman on 2/20/2017.
  */
 public class Validation {
+    public static int getIntFood(Scanner sc, String prompt) {
+
+        int i = 0;
+
+        boolean isValid = false;
+
+        while (isValid == false) {
+            System.out.println(prompt);
+            if (sc.hasNextInt()) {
+                i = sc.nextInt();
+                i -= 1;
+                isValid = true;
+
+            } else {
+                System.out.println("Error! Invalid integer value. Try again.");
+                sc.nextLine();
+            }
+        }
+        sc.nextLine();
+        return i;
+    }
+
+
     public static int getInt(Scanner sc, String prompt) {
 
         int i = 0;
@@ -11,7 +34,7 @@ public class Validation {
         boolean isValid = false;
 
         while (isValid == false) {
-            System.out.print(prompt);
+            System.out.println(prompt);
             if (sc.hasNextInt()) {
                 i = sc.nextInt();
                 isValid = true;
@@ -21,7 +44,7 @@ public class Validation {
                 sc.nextLine();
             }
         }
-        sc.nextLine();  // discard any other data entered on the line
+        sc.nextLine();
         return i;
     }
 
@@ -64,7 +87,7 @@ public class Validation {
         while (!(s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("no"))) {
             System.out.println("Error! Invalid entry, please type yes or no ");
             s = sc.next();
-            sc.nextLine();  // discard any other data entered on the line
+            sc.nextLine();
 
         }
         return s;
