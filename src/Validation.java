@@ -4,6 +4,9 @@ import java.util.Scanner;
  * Created by wilsonnorman on 2/20/2017.
  */
 public class Validation {
+    //long creditCardNumber;
+
+
     public static int getIntFood(Scanner sc, String prompt) {
 
         int i = 0;
@@ -25,7 +28,6 @@ public class Validation {
         sc.nextLine();
         return i;
     }
-
 
     public static int getInt(Scanner sc, String prompt) {
 
@@ -62,6 +64,46 @@ public class Validation {
         return s;
     }
 
+    public static long creditCardNumber(Scanner sc, String prompt) {
+        System.out.println(prompt);
+        long creditCardNumber = sc.nextLong();
+
+        while (!isValid(creditCardNumber)){
+            System.out.println("Error! invalid card number ");
+            System.out.println(prompt);
+            creditCardNumber = sc.nextLong();
+        }
+
+        System.out.println();
+        return creditCardNumber;
+
+    }
+
+
+    public static boolean isValid(long creditCardNumber) {
+        int sum = 0;
+        int count = 0;
+
+        while (creditCardNumber > 0) {
+            count++;
+            int digit = (int) (creditCardNumber % 10);
+            if (count % 2 == 1) {
+                sum = sum + digit;
+
+            } else if (digit < 5) {
+                sum = sum + 2 * digit;
+            } else {
+
+                sum = sum + 2 * digit - 9;
+            }
+            creditCardNumber = creditCardNumber / 10;
+        }
+        if (sum % 10 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public static double getDouble(Scanner sc, String prompt, double total) {
         double d = 0;
@@ -102,7 +144,7 @@ public class Validation {
         while (isValid == false) {
             System.out.print(prompt);
             if (sc.hasNextInt()) {
-               i = sc.nextInt();
+                i = sc.nextInt();
                 if (i == 0) {
                     i = sc.nextInt() + 1;
 
@@ -117,3 +159,4 @@ public class Validation {
         return i;
     }
 }
+
