@@ -62,18 +62,24 @@
 
 
 
+
+
+        // Authentic American Cuisine Menu Items With Prices
+
+
+
         // American Cusine Menu Items With Prices
         /*
         double surfTurf = 34.50;
-        double lambCo = 34.50;
-        double southernSoul = 34.50;
+        double deMarcsLambCo = 34.50;
+        double charlieSouthernSoul = 34.50;
 
         double westernPeel = 26.50;
         double asianWok = 26.25;
-        double cajunSkillet = 26.25;
+        double normsCajunSkillet = 26.25;
 
         double mexicanBowl = 24.50;
-        double veganSoul = 24.50;
+        double deNorLiVeganSoul = 24.50;
         double seaFoodJack = 24.50;
 
         double winBuckDepo = 22.50;
@@ -83,20 +89,20 @@
 
         //int decide;
 
-        /*public MenuItems(double surfTurf, double lambCo, double southernSoul, double westernPeel,
-                         double asianWok, double cajunSkillet, double mexicanBowl, double veganSoul, double seaFoodJack,
+        /*public MenuItems(double surfTurf, double deMarcslambCo, double charlieSouthernSoul, double westernPeel,
+                         double asianWok, double normsCajunSkillet, double mexicanBowl, double deNorLiVeganSoul, double seaFoodJack,
                          double winBuckDepo, double roastBeefParle, double burger360) {
 
 
             this.total = total;
             this.surfTurf = surfTurf;
-            this.lambCo = lambCo;
-            this.southernSoul = southernSoul;
+            this.deMarcslambCo = deMarcslambCo;
+            this.charlieSouthernSoul = charlieSouthernSoul;
             this.westernPeel = westernPeel;
             this.asianWok = asianWok;
-            this.cajunSkillet = cajunSkillet;
+            this.normsCajunSkillet = normsCajunSkillet;
             this.mexicanBowl = mexicanBowl;
-            this.veganSoul = veganSoul;
+            this.deNorLiVeganSoul = deNorLiVeganSoul;
             this.seaFoodJack = seaFoodJack;
             this.winBuckDepo = winBuckDepo;
             this.roastBeefParle = roastBeefParle;
