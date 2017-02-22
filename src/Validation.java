@@ -102,11 +102,12 @@ public class Validation {
         while (isValid == false) {
             System.out.print(prompt);
             if (sc.hasNextInt()) {
-                i = sc.nextInt();
+               i = sc.nextInt();
                 if (i == 0) {
                     i = sc.nextInt() + 1;
 
                 }
+                isValid = true;
             } else {
                 System.out.println("Error! Invalid integer value. Try again.");
                 sc.nextLine();
