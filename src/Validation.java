@@ -66,7 +66,7 @@ public class Validation {
     public static double getDouble(Scanner sc, String prompt, double total) {
         double d = 0;
         boolean isValid = false;
-
+        System.out.println(prompt);
         while (isValid == false) {
             d = sc.nextDouble();
             if (d < total) {
@@ -100,11 +100,11 @@ public class Validation {
         boolean isValid = false;
 
         while (isValid == false) {
-            System.out.print(prompt);
+            System.out.println(prompt);
             if (sc.hasNextInt()) {
                i = sc.nextInt();
                 if (i == 0) {
-                    i = sc.nextInt() + 1;
+                    i = 1;
 
                 }
                 isValid = true;

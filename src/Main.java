@@ -13,17 +13,17 @@ public class Main {
     public static void main(String[] args) {
     	DecimalFormat df1 = new DecimalFormat("#.00");
         Scanner scan = new Scanner(System.in);
-        double price = 2;
         String answer = "";
         double cost = 0;
-        double total = 0;
+
 
         Validation valid = new Validation();
 
 
-        System.out.println("Welcome to the DeNorLi");
+
         ArrayList<Menu> foodList = new ArrayList<Menu>();
         ArrayList<Menu> orderList = new ArrayList<Menu>();
+        ArrayList<Integer> quantityList = new ArrayList<Integer>();
 
 
         Menu food1 = new Menu("surfTurf", "Entree", "Dry aged 16oz. PorterHouse W/Veggies Grilled Shrimp", 54.00);
@@ -51,7 +51,11 @@ public class Main {
         foodList.add(food10);
         foodList.add(food11);
         foodList.add(food12);
+
         while (true) {
+            double total = 0;
+            double overallTotal = 0;
+            System.out.println("Welcome to the DeNorLi");
             do {
                 int order = showMenu(scan, foodList);
 
@@ -60,8 +64,21 @@ public class Main {
                 orderList.add(foodList.get(order));
 
                 System.out.println("It cost $" + df1.format(cost));
-                    total += getTotalPrice(scan, cost);
-                    answer = valid.getYesOrNo(scan, "Would you like anything else?");
+                
+                int quantity = getQuantity(scan);
+                total += getTotalAmount(quantity, cost);
+
+                if(total > cost) {
+                    System.out.println("The cost of the " + quantity +" " + foodList.get(order).getName() + " is $"
+                            + df1.format(total) + ".");
+                }
+
+                overallTotal += total;
+                if(overallTotal > total){
+                    System.out.println("Your over all total cost is $" + overallTotal);
+                }
+
+                answer = valid.getYesOrNo(scan, "Would you like anything else?");
                 } while (answer.equalsIgnoreCase("yes"));
 
                 double saleTax = getSaleTax(total);
@@ -69,13 +86,14 @@ public class Main {
 
                 System.out.println(pay(scan, total));
 
-                getReceipt(orderList, total, grandTotal);
-                System.out.println("Thank you, and come back, soon!");
+            System.out.println("Press anything + [Enter] to start see your receipt:");
+            scan.next();
+            getReceipt(orderList, total, grandTotal);
             System.out.println("");
             System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
+            System.out.println("Press anything + [Enter] to start the menu again.");
+            scan.nextLine();
+            scan.nextLine();
         }
     }
 
@@ -87,19 +105,24 @@ public class Main {
 
 
     //This method is for the getting the total price of the without tax
-    public static double getTotalPrice(Scanner scan, double price){
+    public static double getTotalAmount(int quantity, double price){
+
+        return quantity * price;
+    }
+
+    public static int getQuantity(Scanner scan){
         Validation valid = new Validation(); 
         int quantity = valid.getNoZero(scan, "How many do you want?");
-        return price * quantity;
+        return quantity;
     }
 
     public static String pay(Scanner scan, double total){
         Validation valid = new Validation();
-        String paymentType = valid.getString(scan, "What way would like to pay, cash, check or credit?");
+        String paymentType = valid.getString(scan, "What way would like to pay cash, check or credit?");
         if(paymentType.equalsIgnoreCase("cash")){
-            double cashAmount = valid.getDouble(scan, "Put in your amount.", total);
-            amountOfChange(total, cashAmount, "Your change is ");
-            return "Thank you!";
+            double cashAmount = valid.getDouble(scan, "Please, put in your dollar amount:", total);
+            double change = amountOfChange(total, cashAmount);
+            return "Your change is " + change;
         }else if(paymentType.equalsIgnoreCase("check")){
             valid.getInt(scan, "What is the check number?");
             return "Thank you!";
@@ -126,9 +149,8 @@ public class Main {
         return choice;
     }
     
-    public static double amountOfChange(double total, double cashAmount, String prompt){
+    public static double amountOfChange(double total, double cashAmount){
         double change = cashAmount - total;
-        System.out.println(prompt + change);
         return change;
     }
     
@@ -139,8 +161,11 @@ public class Main {
         }
         System.out.println("Your subtotal is " + subtotal);
         System.out.println("Your grand total is " + grandTotal);
+        System.out.println("Thank you, and come back, soon!");
     }
+
     public static double getSaleTax(double totalPrice){
-    	return totalPrice * .1;
+
+        return totalPrice * .1;
     }
 }
