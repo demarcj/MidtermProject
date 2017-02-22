@@ -22,8 +22,9 @@ public class Main {
 
 
         ArrayList<Menu> foodList = new ArrayList<Menu>();
-        ArrayList<Menu> orderList = new ArrayList<Menu>();
+        ArrayList<String> orderList = new ArrayList<String>();
         ArrayList<Integer> quantityList = new ArrayList<Integer>();
+        ArrayList<Double> costList = new ArrayList<Double>();
 
 
         Menu food1 = new Menu("surfTurf", "Entree", "Dry aged 16oz. PorterHouse W/Veggies Grilled Shrimp", 54.00);
@@ -61,12 +62,14 @@ public class Main {
 
 
                 cost = foodList.get(order).getPrice();
-                orderList.add(foodList.get(order));
+                orderList.add(foodList.get(order).getName());
 
                 System.out.println("It cost $" + df1.format(cost));
                 
                 int quantity = getQuantity(scan);
-                total += getTotalAmount(quantity, cost);
+                total = getTotalAmount(quantity, cost);
+                quantityList.add(quantity);
+                costList.add(total);
 
                 if(total > cost) {
                     System.out.println("The cost of the " + quantity +" " + foodList.get(order).getName() + " is $"
@@ -81,17 +84,18 @@ public class Main {
                 answer = valid.getYesOrNo(scan, "Would you like anything else?");
                 } while (answer.equalsIgnoreCase("yes"));
 
-                double saleTax = getSaleTax(total);
-                double grandTotal = getGrandTotal(total, saleTax);
+                double saleTax = getSaleTax(overallTotal);
+                double grandTotal = getGrandTotal(overallTotal, saleTax);
+            System.out.println("Your total is " + overallTotal);
+            System.out.println("With taxes it's " + grandTotal);
+            double change = pay(scan, grandTotal);
 
-                System.out.println(pay(scan, total));
-
-            System.out.println("Press anything + [Enter] to start see your receipt:");
+            System.out.println("Press any key + [Enter] to see your receipt:");
             scan.next();
-            getReceipt(orderList, total, grandTotal);
+            getReceipt(orderList, quantityList, costList, saleTax, grandTotal, change, df1);
             System.out.println("");
             System.out.println("");
-            System.out.println("Press anything + [Enter] to start the menu again.");
+            System.out.println("Press any key + [Enter] to start the menu again.");
             scan.nextLine();
             scan.nextLine();
         }
@@ -116,21 +120,24 @@ public class Main {
         return quantity;
     }
 
-    public static String pay(Scanner scan, double total){
+    public static double pay(Scanner scan, double total){
         Validation valid = new Validation();
-        String paymentType = valid.getString(scan, "What way would like to pay cash, check or credit?");
+        String paymentType = valid.getString(scan, "How would like to pay cash, check or credit?");
         if(paymentType.equalsIgnoreCase("cash")){
             double cashAmount = valid.getDouble(scan, "Please, put in your dollar amount:", total);
             double change = amountOfChange(total, cashAmount);
-            return "Your change is " + change;
+            System.out.println("Your change is " + change);
+            return change;
         }else if(paymentType.equalsIgnoreCase("check")){
             valid.getInt(scan, "What is the check number?");
-            return "Thank you!";
+            System.out.println("Thank you!");
+            return 0;
         }else {
             valid.creditCardNumber(scan, "What is your credit card number?");
             valid.getInt(scan, "What is the expiration date?");
             valid.getInt(scan, "What is the CVV?");
-            return "Thank you!";
+            System.out.println("Thank you!");
+            return 0;
         }
 
     }
@@ -155,13 +162,17 @@ public class Main {
         return change;
     }
     
-    public static void getReceipt(ArrayList<Menu> orderList, double subtotal, double grandTotal){
+    public static void getReceipt(ArrayList<String> orderList, ArrayList<Integer> quantity, ArrayList<Double> costList,
+                                   double saleTax ,double grandTotal, double change, DecimalFormat df1){
         System.out.println("You've ordered:");
         for(int i = 0; i < orderList.size(); i++){
-            System.out.println(orderList.get(i));
+            System.out.println(quantity.get(i) + "\t" + orderList.get(i) + "\t$" + df1.format(costList.get(i)));
         }
-        System.out.println("Your subtotal is " + subtotal);
-        System.out.println("Your grand total is " + grandTotal);
+        System.out.println("Your sale tax is $" + df1.format(saleTax));
+        System.out.println("Your grand total is $" + df1.format(grandTotal));
+        if(change > 0.01) {
+            System.out.println("Your change is $" + df1.format(change));
+        }
         System.out.println("Thank you, and come back, soon!");
     }
 
