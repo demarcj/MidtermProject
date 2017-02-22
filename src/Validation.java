@@ -18,6 +18,7 @@ public class Validation {
 
             } else {
                 System.out.println("Error! Invalid integer value. Try again.");
+                sc.nextLine();
             }
         }
         sc.nextLine();  // discard any other data entered on the line
@@ -69,4 +70,26 @@ public class Validation {
         return s;
     }
 
+    public static int getNoZero(Scanner sc, String prompt) {
+
+        int i = 0;
+
+        boolean isValid = false;
+
+        while (isValid == false) {
+            System.out.print(prompt);
+            if (sc.hasNextInt()) {
+                i = sc.nextInt();
+                if (i == 0) {
+                    i = sc.nextInt() + 1;
+
+                }
+            } else {
+                System.out.println("Error! Invalid integer value. Try again.");
+                sc.nextLine();
+            }
+        }
+        sc.nextLine();  // discard any other data entered on the line
+        return i;
+    }
 }

@@ -98,7 +98,7 @@ public class Main {
     //This method is for the getting the total price of the without tax
     public static double getTotalPrice(Scanner scan, double price){
         Validation valid = new Validation(); 
-        int quantity = valid.getInt(scan, "How many do you want?");
+        int quantity = valid.getNoZero(scan, "How many do you want?");
         return price * quantity;
     }
 
