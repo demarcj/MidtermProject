@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        //private static DecimalFormat df2 = new DecimalFormat(".##");
+    	DecimalFormat df1 = new DecimalFormat("#.00");
         Scanner scan = new Scanner(System.in);
         double price = 2;
         String answer = "";
@@ -59,13 +59,12 @@ public class Main {
                 cost = foodList.get(order).getPrice();
                 orderList.add(foodList.get(order));
 
-                System.out.println("It cost " + cost);
+                System.out.println("It cost $" + df1.format(cost));
                     total += getTotalPrice(scan, cost);
                     answer = valid.getYesOrNo(scan, "Would you like anything else?");
                 } while (answer.equalsIgnoreCase("yes"));
 
                 double saleTax = getSaleTax(total);
-                System.out.println(saleTax);
                 double grandTotal = getGrandTotal(total, saleTax);
 
                 System.out.println(pay(scan, total));
@@ -101,7 +100,7 @@ public class Main {
             double cashAmount = valid.getDouble(scan, "Put in your amount.", total);
             amountOfChange(total, cashAmount, "Your change is ");
             return "Thank you!";
-        }else if(paymentType.equalsIgnoreCase("check number")){
+        }else if(paymentType.equalsIgnoreCase("check")){
             valid.getInt(scan, "What is the check number?");
             return "Thank you!";
         }else {
@@ -115,7 +114,9 @@ public class Main {
    public static int showMenu(Scanner scan, ArrayList<Menu> foodList){
        int choice = 0;
     	for(int i = 0; i < foodList.size(); i++){
-            System.out.println((i + 1) + " " + foodList.get(i));
+            System.out.println((i + 1) + ". " + foodList.get(i));
+            System.out.println(foodList.get(i).getDescription());
+            System.out.println("");
     	    if(i == foodList.size() - 1){
                 Validation valid = new Validation();
                 choice = valid.getIntFood(scan, "What food would you like?");
