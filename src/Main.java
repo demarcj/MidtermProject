@@ -90,9 +90,10 @@ public class Main {
             //This last section is the payment and receipt section
             double saleTax = getSaleTax(overAllTotal);
             double grandTotal = getGrandTotal(overAllTotal, saleTax);
-            System.out.println("Your total is " + overAllTotal);
-            System.out.println("With taxes it's " + grandTotal);
-            double change = pay(scan, grandTotal);
+            System.out.println("Your total is $" + df1.format(overAllTotal));
+            System.out.println("Your sale tax is $" + df1.format(saleTax));
+            System.out.println("Altogether it's $" + df1.format(grandTotal));
+            double change = pay(scan, grandTotal, df1);
 
             //This slow down the amount of information being thrown at the user, also tell the user that clearly this is
             //the receipt that is about to be shown
@@ -130,13 +131,13 @@ public class Main {
     }
 
     //This will allow the user to pay either in cash, check or credit
-    public static double pay(Scanner scan, double total){
+    public static double pay(Scanner scan, double total, DecimalFormat df1){
         Validation valid = new Validation();
         String paymentType = valid.getString(scan, "How would like to pay cash, check or credit?");
         if(paymentType.equalsIgnoreCase("cash")){
             double cashAmount = valid.getDouble(scan, "Please, put in your dollar amount:", total);
             double change = amountOfChange(total, cashAmount);
-            System.out.println("Your change is " + change);
+            System.out.println("Your change is $" + df1.format(change));
             return change;
         }else if(paymentType.equalsIgnoreCase("check")){
             valid.getInt(scan, "What is the check number?");
