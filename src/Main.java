@@ -14,14 +14,13 @@ public class Main {
     	DecimalFormat df1 = new DecimalFormat("#.00");
         Scanner scan = new Scanner(System.in);
         String answer = "";
-        double cost = 0;
-
-
+        double price = 0;
         Validation valid = new Validation();
 
 
 
         ArrayList<Menu> foodList = new ArrayList<Menu>();
+        //These list 3 below is used to store data if the user decides to order more than once and to place that data into the receipt 
         ArrayList<String> orderList = new ArrayList<String>();
         ArrayList<Integer> quantityList = new ArrayList<Integer>();
         ArrayList<Double> costList = new ArrayList<Double>();
@@ -53,73 +52,84 @@ public class Main {
         foodList.add(food11);
         foodList.add(food12);
 
-        while (true) {
+        while (true) {//This will restart the app to the beginning
             double total = 0;
-            double overallTotal = 0;
+            double overAllTotal = 0;
             System.out.println("Welcome to the DeNorLi");
-            do {
-                int order = showMenu(scan, foodList);
+            do {//This do-while allow the user to re-order before paying for food
+                //This int will all us to get the index for the food's name outside of the showMenu method
+            	int order = showMenu(scan, foodList);
 
-
-                cost = foodList.get(order).getPrice();
+                price = foodList.get(order).getPrice();
                 orderList.add(foodList.get(order).getName());
 
-                System.out.println("It cost $" + df1.format(cost));
+                System.out.println("It cost $" + df1.format(price));
                 
-                int quantity = getQuantity(scan);
-                total = getTotalAmount(quantity, cost);
+                int quantity = getQuantity(scan, "How many do you want?");
+                total = getTotalAmount(quantity, price);
                 quantityList.add(quantity);
                 costList.add(total);
-
-                if(total > cost) {
+                
+                //This if statement will run if the user order more than one of the food item and will show total price 
+                //of quantity of that item
+                if(total > price) {
                     System.out.println("The cost of the " + quantity +" " + foodList.get(order).getName() + " is $"
                             + df1.format(total) + ".");
                 }
-
-                overallTotal += total;
-                if(overallTotal > total){
-                    System.out.println("Your over all total cost is $" + overallTotal);
+                
+                //The difference between the total and overAllTotal is that overAllTotal will keep updating the price 
+                //if the user order again while the total will only show the price of current order
+                overAllTotal += total;
+                if(overAllTotal > total){
+                    System.out.println("Your over all total cost is $" + overAllTotal);
                 }
 
                 answer = valid.getYesOrNo(scan, "Would you like anything else?");
                 } while (answer.equalsIgnoreCase("yes"));
 
-                double saleTax = getSaleTax(overallTotal);
-                double grandTotal = getGrandTotal(overallTotal, saleTax);
-            System.out.println("Your total is " + overallTotal);
+            //This last section is the payment and receipt section
+            double saleTax = getSaleTax(overAllTotal);
+            double grandTotal = getGrandTotal(overAllTotal, saleTax);
+            System.out.println("Your total is " + overAllTotal);
             System.out.println("With taxes it's " + grandTotal);
             double change = pay(scan, grandTotal);
 
+            //This slow down the amount of information being thrown at the user, also tell the user that clearly this is
+            //the receipt that is about to be shown
             System.out.println("Press any key + [Enter] to see your receipt:");
             scan.next();
             getReceipt(orderList, quantityList, costList, saleTax, grandTotal, change, df1);
             System.out.println("");
             System.out.println("");
+            
+            //This stop the user from restarting without them noticing it and allows the user to read the receipt
             System.out.println("Press any key + [Enter] to start the menu again.");
             scan.nextLine();
             scan.nextLine();
-        }
-    }
+        }//End of app, but this app will while infinity
+    }//End of the main
 
 
-
+    //The total of an order or multiple orders plus tax
     public static double getGrandTotal(double x, double y){
     	return x + y;
     }
 
 
-    //This method is for the getting the total price of the without tax
+    //This method is for the getting the total price before tax
     public static double getTotalAmount(int quantity, double price){
-
         return quantity * price;
     }
 
-    public static int getQuantity(Scanner scan){
+    //The end goal for this simple method is to put this quantity data into an arraylist so later this data
+    //can be used in the receipt
+    public static int getQuantity(Scanner scan, String prompt){
         Validation valid = new Validation(); 
-        int quantity = valid.getNoZero(scan, "How many do you want?");
+        int quantity = valid.getNoZero(scan, prompt);
         return quantity;
     }
 
+    //This will allow the user to pay either in cash, check or credit
     public static double pay(Scanner scan, double total){
         Validation valid = new Validation();
         String paymentType = valid.getString(scan, "How would like to pay cash, check or credit?");
@@ -157,6 +167,7 @@ public class Main {
         return choice;
     }
     
+    //Get change if user pay by cash and there is a difference left
     public static double amountOfChange(double total, double cashAmount){
         double change = cashAmount - total;
         return change;
@@ -177,7 +188,6 @@ public class Main {
     }
 
     public static double getSaleTax(double totalPrice){
-
         return totalPrice * .1;
     }
 }
